@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import {Counter} from './Counter';
 
 export const Book = (props) => {
     const book = props.book;
@@ -13,7 +14,7 @@ export const Book = (props) => {
                     <Price>{book.price} ₽</Price>
                 </div>
             </div>
-            {/*counter*/}
+            <Counter></Counter>
         </BookContainer>
     )
 }
@@ -28,7 +29,7 @@ const BookContainer = styled.li`
   }
   list-style-type: none;
   display: flex;
-  align-items: ${props => props.bottomCounter ? 'end' : 'center'};
+  align-items: center;
   justify-content: space-between;
 `
 
