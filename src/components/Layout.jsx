@@ -5,7 +5,7 @@ export const Layout = (props) => {
     return (
         <Container>
             <HeaderContainer>
-                <Logo><Link href="#">Магазин</Link></Logo>
+                <a href="#"><Logo>Магазин</Logo></a>
                 <a href="#"><CartImg src={cartImg} alt="1"/></a>
             </HeaderContainer>
             <Main>
@@ -36,9 +36,6 @@ const HeaderContainer = styled.header`
 const Logo = styled.h1`
   font-weight: 700;
   font-size: 1.3rem;
-`
-
-const Link = styled.a`
   color: white;
 `
 
