@@ -2,15 +2,17 @@ import styled from 'styled-components'
 import cartImg from '../images/cart.svg';
 
 export const Layout = (props) => {
-    return <Container>
-        <HeaderContainer>
-            <Logo><Link href="#">Магазин</Link></Logo>
-            <a href="#"><CartImg src={cartImg} alt="1"/></a>
-        </HeaderContainer>
-        <Main>
-            {props.children}
-        </Main>
-    </Container>
+    return (
+        <Container>
+            <HeaderContainer>
+                <Logo><Link href="#">Магазин</Link></Logo>
+                <a href="#"><CartImg src={cartImg} alt="1"/></a>
+            </HeaderContainer>
+            <Main>
+                {props.children}
+            </Main>
+        </Container>
+    )
 }
 
 const Container = styled.div`
