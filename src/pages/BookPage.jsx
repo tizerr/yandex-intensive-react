@@ -1,6 +1,6 @@
 import {Book} from "../components/Book";
-// import {Reviews} from "../components/Reviews";
 import styled from 'styled-components';
+import {Review} from "../components/Review";
 
 export const BookPage = ({book}) => {
     return (
@@ -12,7 +12,9 @@ export const BookPage = ({book}) => {
                     <p>{book.annotation}</p>
                 </AnnotationContainer>
             </Description>
-            {/*<Reviews/>*/}
+            <ReviewsContainer>
+                { book.reviews.map((review) => <Review key={review.id} review={review}/>) }
+            </ReviewsContainer>
         </PageContainer>
     )
 }
@@ -22,6 +24,10 @@ const PageContainer = styled.div`
   @media (max-width: 1100px) {
     padding: 2.5rem 1rem;
   }
+`
+
+const ReviewsContainer = styled.section`
+  margin-top: 2.5rem;
 `
 
 const Description = styled.section`
