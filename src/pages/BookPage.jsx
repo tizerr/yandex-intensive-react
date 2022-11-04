@@ -43,6 +43,7 @@ const BookDescription = styled(Book)`
 
 const Title = styled.h3`
   font-size: 1rem;
+  margin-bottom: 1rem;
 `
 
 const AnnotationContainer = styled.div`
