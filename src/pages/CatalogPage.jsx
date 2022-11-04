@@ -1,5 +1,6 @@
 import {useState} from "react";
 import styled from 'styled-components';
+import {Book} from "../components/Book";
 
 export const CatalogPage = (props) => {
     const [activeCategory, setActiveCategory] = useState(props.categories[0]);
@@ -12,7 +13,9 @@ export const CatalogPage = (props) => {
                 }
             </Categories>
             <Books>
-
+                {
+                    activeCategory.books.map((book) => <Book key={book.id} book={book}/>)
+                }
             </Books>
         </PageContainer>
     )
