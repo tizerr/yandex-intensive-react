@@ -9,24 +9,24 @@ app.use(function (req, res, next) {
   next();
 });
 
-app.get('/test', (req,res) => {
-    res.send({data: 'Everything is OK!'})
+app.get('/api/test', (req,res) => {
+    res.send('Everything is OK!')
 })
 
-app.get('/full-data', (req,res) => {
-    res.send({data: DB})
+app.get('/api/full-data', (req,res) => {
+    res.send(DB)
 })
 
-app.get('/genres', (req,res) => {
+app.get('/api/categories', (req,res) => {
     const genres = DB.map(item => {
         return {id: item.id, name: item.name}
     })
-    res.send({data: genres})
+    res.send(genres)
 })
 
-app.get('/genres/:id', (req,res) => {
+app.get('/api/categories/:id', (req,res) => {
     const genre = DB.find(item => item.id === req.params.id)
-    res.send({data: genre.books})
+    res.send(genre)
 })
 
 app.listen(port, 'localhost', function (err) {

@@ -1,21 +1,32 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import styled from 'styled-components';
 import {Book} from "../components/Book";
+import {selectCategories} from "../store/category/selectors";
+import {useDispatch, useSelector} from "react-redux";
+import {loadCinemasIfNotExist} from "../store/category/loadCinemasIfNotExist";
 
-export const CatalogPage = (props) => {
-    const [activeCategory, setActiveCategory] = useState(props.categories[0]);
+export const CatalogPage = () => {
+    const dispatch = useDispatch();
+    const categories = useSelector(state => selectCategories(state));
+    console.log(categories);
+    const [activeCategory, setActiveCategory] = useState();  //delete
+
+    useEffect(() => {
+        console.log('ok');
+        dispatch(loadCinemasIfNotExist);
+    }, []);
 
     return (
         <PageContainer>
             <Categories>
                 {
-                    props.categories.map((category) => <Li key={category.id}><Button active={category === activeCategory} onClick={() => setActiveCategory(category)}>{category.name}</Button></Li>)
+                    categories.map((category) => <Li key={category.id}><Button active={category === activeCategory} onClick={() => setActiveCategory(category)}>{category.name}</Button></Li>)
                 }
             </Categories>
             <Books>
-                {
-                    activeCategory.books.map((book) => <Book key={book.id} book={book}/>)
-                }
+                {/*{*/}
+                {/*    activeCategory.books.map((book) => <Book key={book.id} book={book}/>)*/}
+                {/*}*/}
             </Books>
         </PageContainer>
     )

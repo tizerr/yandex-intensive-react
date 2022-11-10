@@ -3,7 +3,7 @@ import { categorySlice } from "./category";
 
 export const store = configureStore({
     reducer: combineReducers({
-        cinema: categorySlice.reducer,
+        category: categorySlice.reducer,
     }),
     middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
 });
