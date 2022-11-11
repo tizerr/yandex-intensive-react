@@ -2,6 +2,7 @@ import styled from "styled-components";
 import {Counter} from './Counter';
 import {useSelector} from "react-redux";
 import {selectBookById} from "../store/book/selectors";
+import {Link} from "react-router-dom";
 
 export const Book = ({bookId, className}) => {
     const book = useSelector((state) => selectBookById(state, bookId));
@@ -9,7 +10,7 @@ export const Book = ({bookId, className}) => {
     if (!book) return null;
 
     return (
-        <BookContainer className={className}>
+        <CustomLink to={`/books/${bookId}`} className={className}>
             <div>
                 <Title>{book.name}</Title>
                 <div>
@@ -20,11 +21,11 @@ export const Book = ({bookId, className}) => {
                 </div>
             </div>
             <Counter bookId={bookId}/>
-        </BookContainer>
+        </CustomLink>
     )
 }
 
-const BookContainer = styled.li`
+const CustomLink = styled(Link)`
   background-color: white;
   padding: 1rem 1.5rem;
   border-radius: 0.5rem;
@@ -36,6 +37,7 @@ const BookContainer = styled.li`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  color: inherit;
 `
 
 const Title = styled.h2`

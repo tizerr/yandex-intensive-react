@@ -10,7 +10,7 @@ export const Counter = ({bookId}) => {
     const count = useSelector((state) => selectBookCount(state, bookId));
 
     return (
-        <CounterContainer>
+        <CounterContainer onClick={e => e.preventDefault()}>
             <CounterButton onClick={() => dispatch(cartSlice.actions.removeBook(bookId))} disabled={!count}><CounterImg src={minusImg} alt=""/></CounterButton>
             <CounterValue>{ count || 0 }</CounterValue>
             <CounterButton onClick={() => dispatch(cartSlice.actions.addBook(bookId))} disabled={count === 6}><CounterImg src={plusImg} alt=""/></CounterButton>
@@ -43,6 +43,7 @@ const CounterContainer = styled.div`
   display: flex;
   height: fit-content;
   align-items: center;
+  cursor: default;
 `
 
 const CounterImg = styled.img`

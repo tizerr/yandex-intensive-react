@@ -32,6 +32,6 @@ export const Books = () => {
     )
 }
 
-const BooksConatiner = styled.ul`
+const BooksConatiner = styled.div`
   width: 80%;
 `

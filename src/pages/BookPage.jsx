@@ -1,12 +1,25 @@
 import {Book} from "../components/Book";
 import styled from 'styled-components';
 import {Review} from "../components/Review";
+import {useParams} from "react-router-dom";
+import {useSelector} from "react-redux";
+import {selectBookById} from "../store/book/selectors";
+import {useEffect} from "react";
 
-export const BookPage = ({book}) => {
+
+export const BookPage = () => {
+    const {bookId} = useParams();
+
+    const book = useSelector((state) => selectBookById(state, bookId));
+    console.log(bookId)
+
+    if (!book) return null;
+    console.log('ok2')
+
     return (
         <PageContainer>
             <Description>
-                <BookDescription book={book}></BookDescription>
+                <BookDescription bookId={bookId}></BookDescription>
                 <AnnotationContainer>
                     <Title>Аннотация</Title>
                     <p>{book.annotation}</p>

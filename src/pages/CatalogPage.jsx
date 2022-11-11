@@ -59,5 +59,4 @@ const CustomNavLink = styled(NavLink)`
   &.active {
     font-weight: 700;
   }
-  
 `
