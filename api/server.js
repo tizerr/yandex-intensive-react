@@ -26,7 +26,40 @@ app.get('/api/categories', (req,res) => {
 
 app.get('/api/categories/:id', (req,res) => {
     const genre = DB.find(item => item.id === req.params.id)
-    res.send(genre.books)
+    res.send(genre.books.map((b) => ({id: b.id, name: b.name, price: b.price, authors: b.authors,
+        mark: b.mark, subgenre: b.subgenre, annotation: b.annotation, reviews: b.reviews.map((r) => r.id)})))
+})
+
+app.get('/api/books/:id', (req,res) => {
+    let toBreak = false;
+    let book;
+    for (const genre of DB){
+        for (const bk of genre.books) {
+            if (bk.id === req.params.id) {
+                book = bk;
+                toBreak = true;
+                break;
+            }
+        }
+        if (toBreak) break;
+    }
+    res.send(book)
+})
+
+app.get('/api/books/:id/reviews', (req,res) => {
+    let toBreak = false;
+    let book;
+    for (const genre of DB){
+        for (const bk of genre.books) {
+            if (bk.id === req.params.id) {
+                book = bk;
+                toBreak = true;
+                break;
+            }
+        }
+        if (toBreak) break;
+    }
+    res.send(book.reviews)
 })
 
 app.listen(port, 'localhost', function (err) {

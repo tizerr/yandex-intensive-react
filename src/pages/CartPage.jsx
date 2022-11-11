@@ -3,23 +3,24 @@ import {useSelector} from "react-redux";
 import {Books} from "../components/Books";
 import {selectCartModule} from "../store/cart/selectors";
 import {Price} from "../components/Price";
-
-
-
+import {selectBooks} from "../store/book/selectors";
 
 export const CartPage = () => {
 
     const books = useSelector((state) => selectCartModule(state)) || [];
-    // console.log(books)
-    // console.log(Object.entries(books))
+    console.log(books)
+
+    const allBooks = useSelector(state => selectBooks(state));
+    console.log(allBooks)
 
     if (!books) return null;
+    if (!allBooks) return null;
 
     const booksIds = [];
     for (const [id, cnt] of Object.entries(books)) {
-        console.log(id, cnt)
         if (cnt > 0) booksIds.push(id);
     }
+
     console.log(booksIds)
 
     return (
@@ -32,7 +33,17 @@ export const CartPage = () => {
                     }
                 </section>
                 <Buy>
-                    <Sum>Итого: {}</Sum>
+                    <Sum>
+                        <Total>Итого:</Total>
+                        {
+                            booksIds.map((id) => {
+                                const book = allBooks.find((b) => b.id === id);
+                                console.log(book)
+                                return book.price * books[id];
+                            }).reduce((sum, a) => sum + a, 0)
+                        }
+                    </Sum>
+                    <Btn>Купить</Btn>
                 </Buy>
             </Cart>
             <CustomBooks booksIds={booksIds}/>
@@ -45,10 +56,23 @@ const Title = styled.h3`
   margin-bottom: 1rem;
 `
 
+const Total = styled.span`
+  margin-right: 1.1rem;
+`
+
+const Btn = styled.button`
+  background-color: black;
+  color: white;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  padding: 0.1rem 0.5rem;
+  cursor: pointer;
+`
+
 
 const Sum = styled.h2`
   font-size: 1.5rem;
-  margin-bottom: 1rem;
+  vertical-align: center;
 `
 
 const Buy = styled.section`
@@ -74,7 +98,6 @@ const Cart = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  overflow-y: scroll;
 `
 
 const CustomBooks = styled(Books)`

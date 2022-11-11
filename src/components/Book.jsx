@@ -16,7 +16,7 @@ export const Book = ({bookId, className}) => {
                 <div>
                     <Info>{book.authors.join(', ')}</Info>
                     <Info>{book.subgenre}</Info>
-                    <Info>рейтинг: {book.rating}</Info>
+                    <Info>рейтинг: {book.mark}</Info>
                     <Price>{book.price} ₽</Price>
                 </div>
             </div>

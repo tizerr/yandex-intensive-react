@@ -5,17 +5,24 @@ import {useParams} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {selectBookById} from "../store/book/selectors";
 import {useEffect} from "react";
-import {loadBooksIfNotExist} from "../store/book/loadBooksIfNotExist";
+import {loadBookIfNotExist} from "../store/book/loadBookIfNotExist";
+import {loadReviewsIfNotExist} from "../store/review/loadReviewsIfNotExist";
 
 
 export const BookPage = () => {
     const {bookId} = useParams();
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(loadBookIfNotExist(bookId));
+        dispatch(loadReviewsIfNotExist(bookId));
+    }, []);
 
     const book = useSelector((state) => selectBookById(state, bookId));
     console.log(bookId)
 
     if (!book) return null;
-    console.log('ok2')
+    console.log(book.reviews)
 
     return (
         <PageContainer>
@@ -27,7 +34,7 @@ export const BookPage = () => {
                 </AnnotationContainer>
             </Description>
             <ReviewsContainer>
-                { book.reviews.map((review) => <Review key={review.id} review={review}/>) }
+                { book.reviews.map((reviewId) => <Review key={reviewId} reviewId={reviewId}/>) }
             </ReviewsContainer>
         </PageContainer>
     )

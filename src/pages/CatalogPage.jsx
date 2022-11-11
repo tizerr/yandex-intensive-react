@@ -14,13 +14,12 @@ export const CatalogPage = () => {
     }, []);
 
     const categories = useSelector(state => selectCategories(state));
-    console.log(categories);
-    console.log(categories.length === 0);
+    console.log(categories[0], categories[0].id);
+
 
     if (categories.length === 0) return null;
 
-    console.log(categories)
-    // navigate(`/categories/${categories[0].id}`)
+    // navigate(`categories/${categories[0].id}`)
 
     return (
         <PageContainer>

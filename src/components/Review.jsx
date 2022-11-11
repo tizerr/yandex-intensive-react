@@ -1,6 +1,14 @@
 import styled from "styled-components";
+import {useSelector} from "react-redux";
+import {selectReviewById} from "../store/review/selectors";
 
-export const Review = ({review}) => {
+export const Review = ({reviewId}) => {
+
+    const review = useSelector((state) => selectReviewById(state, reviewId))
+    console.log(review)
+
+    if (!review) return null;
+
     return <ReviewContainer>
         <Title>
             <Author>{review.user.name}</Author>
