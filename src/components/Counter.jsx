@@ -1,16 +1,19 @@
 import styled from "styled-components";
 import plusImg from '../images/plus.svg'
 import minusImg from '../images/minus.svg'
-import {useState} from "react";
+import {useDispatch, useSelector} from "react-redux";
+import {selectBookCount} from "../store/cart/selectors";
+import {cartSlice} from "../store/cart";
 
-export const Counter = () => {
-    const [count, setCount] = useState(0)
+export const Counter = ({bookId}) => {
+    const dispatch = useDispatch();
+    const count = useSelector((state) => selectBookCount(state, bookId));
 
     return (
         <CounterContainer>
-            <CounterButton onClick={() => setCount(count - 1)} disabled={count === 0}><CounterImg src={minusImg} alt=""/></CounterButton>
-            <CounterValue>{ count }</CounterValue>
-            <CounterButton onClick={() => setCount(count + 1)} disabled={count === 6}><CounterImg src={plusImg} alt=""/></CounterButton>
+            <CounterButton onClick={() => dispatch(cartSlice.actions.removeBook(bookId))} disabled={!count}><CounterImg src={minusImg} alt=""/></CounterButton>
+            <CounterValue>{ count || 0 }</CounterValue>
+            <CounterButton onClick={() => dispatch(cartSlice.actions.addBook(bookId))} disabled={count === 6}><CounterImg src={plusImg} alt=""/></CounterButton>
         </CounterContainer>
     )
 }

@@ -1,11 +1,12 @@
 import styled from 'styled-components'
 import cartImg from '../images/cart.svg';
+import {Link} from "react-router-dom";
 
 export const Layout = (props) => {
     return (
         <Container>
             <HeaderContainer>
-                <a href="#"><Logo>Магазин</Logo></a>
+                <Link to='/'><Logo>Магазин</Logo></Link>
                 <a href="#"><CartImg src={cartImg} alt="1"/></a>
             </HeaderContainer>
             <Main>

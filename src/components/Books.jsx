@@ -14,7 +14,6 @@ export const Books = () => {
     }, [categoryId]);
 
     const dispatch = useDispatch();
-    console.log(categoryId);
     const activeCategory = useSelector(state => selectCategoryById(state, categoryId));
 
     if (!activeCategory)

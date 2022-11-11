@@ -1,19 +1,13 @@
-import {useEffect, useState} from "react";
+import {useEffect, } from "react";
 import styled from 'styled-components';
-import {Books} from "../components/Books";
 import {selectCategories} from "../store/category/selectors";
 import {useDispatch, useSelector} from "react-redux";
 import {loadCategoriesIfNotExist} from "../store/category/loadCategoriesIfNotExist";
-import {loadBooksIfNotExist} from "../store/book/loadBooksIfNotExist";
-import {selectBooks} from "../store/book/selectors";
 import {NavLink, Outlet} from "react-router-dom";
 
 export const CatalogPage = () => {
     const dispatch = useDispatch();
     const categories = useSelector(state => selectCategories(state));
-    const books = useSelector(state => selectBooks(state));
-    // console.log(categories);
-    const [activeCategory, setActiveCategory] = useState();  //delete
 
     useEffect(() => {
         dispatch(loadCategoriesIfNotExist);

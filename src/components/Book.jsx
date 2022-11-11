@@ -1,10 +1,9 @@
 import styled from "styled-components";
 import {Counter} from './Counter';
-import {useDispatch, useSelector} from "react-redux";
+import {useSelector} from "react-redux";
 import {selectBookById} from "../store/book/selectors";
 
 export const Book = ({bookId, className}) => {
-    const dispatch = useDispatch();
     const book = useSelector((state) => selectBookById(state, bookId));
 
     if (!book) return null;
@@ -20,7 +19,7 @@ export const Book = ({bookId, className}) => {
                     <Price>{book.price} ₽</Price>
                 </div>
             </div>
-            <Counter></Counter>
+            <Counter bookId={bookId}/>
         </BookContainer>
     )
 }
