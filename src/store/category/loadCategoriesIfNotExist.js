@@ -2,7 +2,7 @@ import { categorySlice } from "./index";
 import { selectCategories } from "./selectors";
 import {prepareData} from "../utils";
 
-export const loadCinemasIfNotExist = (dispatch, getState) => {
+export const loadCategoriesIfNotExist = (dispatch, getState) => {
     if (selectCategories(getState())?.length > 0) {
         return;
     }

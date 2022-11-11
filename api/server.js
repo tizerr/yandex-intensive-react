@@ -19,14 +19,14 @@ app.get('/api/full-data', (req,res) => {
 
 app.get('/api/categories', (req,res) => {
     const genres = DB.map(item => {
-        return {id: item.id, name: item.name}
-    })
+        return {id: item.id, name: item.name, books: item.books.map(book => book.id)}
+    });
     res.send(genres)
 })
 
 app.get('/api/categories/:id', (req,res) => {
     const genre = DB.find(item => item.id === req.params.id)
-    res.send(genre)
+    res.send(genre.books)
 })
 
 app.listen(port, 'localhost', function (err) {

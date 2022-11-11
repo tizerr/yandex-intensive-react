@@ -1,33 +1,32 @@
 import {useEffect, useState} from "react";
 import styled from 'styled-components';
-import {Book} from "../components/Book";
+import {Books} from "../components/Books";
 import {selectCategories} from "../store/category/selectors";
 import {useDispatch, useSelector} from "react-redux";
-import {loadCinemasIfNotExist} from "../store/category/loadCinemasIfNotExist";
+import {loadCategoriesIfNotExist} from "../store/category/loadCategoriesIfNotExist";
+import {loadBooksIfNotExist} from "../store/book/loadBooksIfNotExist";
+import {selectBooks} from "../store/book/selectors";
+import {NavLink, Outlet} from "react-router-dom";
 
 export const CatalogPage = () => {
     const dispatch = useDispatch();
     const categories = useSelector(state => selectCategories(state));
-    console.log(categories);
+    const books = useSelector(state => selectBooks(state));
+    // console.log(categories);
     const [activeCategory, setActiveCategory] = useState();  //delete
 
     useEffect(() => {
-        console.log('ok');
-        dispatch(loadCinemasIfNotExist);
+        dispatch(loadCategoriesIfNotExist);
     }, []);
 
     return (
         <PageContainer>
             <Categories>
                 {
-                    categories.map((category) => <Li key={category.id}><Button active={category === activeCategory} onClick={() => setActiveCategory(category)}>{category.name}</Button></Li>)
+                    categories.map((category) => <Li key={category.id}><CustomNavLink className={({isActive}) => (isActive ? 'active' : '')} to={`/categories/${category.id}`}>{category.name}</CustomNavLink></Li>)
                 }
             </Categories>
-            <Books>
-                {/*{*/}
-                {/*    activeCategory.books.map((book) => <Book key={book.id} book={book}/>)*/}
-                {/*}*/}
-            </Books>
+            <Outlet/>
         </PageContainer>
     )
 }
@@ -56,15 +55,15 @@ const Categories = styled.ul`
   height: 70vh;
 `
 
-const Button = styled.button`
+const CustomNavLink = styled(NavLink)`
   background-color: transparent;
   border: none;
   cursor: pointer;
   font-size: inherit;
   width: 100%;
-  font-weight: ${props => props.active ? '700' : 'default'};
-`
-
-const Books = styled.ul`
-  width: 80%;
+  color: black;
+  &.active {
+    font-weight: 700;
+  }
+  
 `

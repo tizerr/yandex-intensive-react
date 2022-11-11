@@ -1,18 +1,24 @@
 import {Layout} from "./components/Layout";
+import {Books} from "./components/Books";
 import {CatalogPage} from "./pages/CatalogPage";
-// import {BookPage} from "./pages/BookPage";
-import {categories} from "./constants/mock";
+import {BookPage} from "./pages/BookPage";
 import {Provider} from "react-redux";
 import {store} from "./store";
+import {BrowserRouter, Routes, Route} from 'react-router-dom'
 
 function App() {
-    // const testBook = categories[0].books[0]  // for BookPage
     return (
         <Provider store={store}>
-            <Layout>
-              <CatalogPage categories={categories}/>
-              {/*<BookPage book={testBook}></BookPage>*/}
-            </Layout>
+            <BrowserRouter>
+                <Layout>
+                    <Routes>
+                        <Route path="/" element={<CatalogPage/>}>
+                            <Route path='/categories/:categoryId' element={<Books/>}></Route>
+                        </Route>
+                        <Route element={<BookPage/>}></Route>
+                    </Routes>
+                </Layout>
+            </BrowserRouter>
         </Provider>
     );
 }

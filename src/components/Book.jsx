@@ -1,15 +1,21 @@
 import styled from "styled-components";
 import {Counter} from './Counter';
+import {useDispatch, useSelector} from "react-redux";
+import {selectBookById} from "../store/book/selectors";
 
-export const Book = (props) => {
-    const book = props.book;
+export const Book = ({bookId, className}) => {
+    const dispatch = useDispatch();
+    const book = useSelector((state) => selectBookById(state, bookId));
+
+    if (!book) return null;
+
     return (
-        <BookContainer className={props.className}>
+        <BookContainer className={className}>
             <div>
                 <Title>{book.name}</Title>
                 <div>
                     <Info>{book.authors.join(', ')}</Info>
-                    <Info>{book.genre}</Info>
+                    <Info>{book.subgenre}</Info>
                     <Info>рейтинг: {book.rating}</Info>
                     <Price>{book.price} ₽</Price>
                 </div>
