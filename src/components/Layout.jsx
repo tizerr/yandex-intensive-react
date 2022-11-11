@@ -7,7 +7,7 @@ export const Layout = (props) => {
         <Container>
             <HeaderContainer>
                 <Link to='/'><Logo>Магазин</Logo></Link>
-                <a href="#"><CartImg src={cartImg} alt="1"/></a>
+                <Link to='/cart'><CartImg src={cartImg} alt=""/></Link>
             </HeaderContainer>
             <Main>
                 {props.children}

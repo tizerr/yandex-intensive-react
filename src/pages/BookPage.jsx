@@ -2,9 +2,10 @@ import {Book} from "../components/Book";
 import styled from 'styled-components';
 import {Review} from "../components/Review";
 import {useParams} from "react-router-dom";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {selectBookById} from "../store/book/selectors";
 import {useEffect} from "react";
+import {loadBooksIfNotExist} from "../store/book/loadBooksIfNotExist";
 
 
 export const BookPage = () => {
