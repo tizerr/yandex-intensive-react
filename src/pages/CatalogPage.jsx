@@ -3,23 +3,18 @@ import styled from 'styled-components';
 import {selectCategories} from "../store/category/selectors";
 import {useDispatch, useSelector} from "react-redux";
 import {loadCategoriesIfNotExist} from "../store/category/loadCategoriesIfNotExist";
-import {NavLink, Outlet, useNavigate} from "react-router-dom";
+import {NavLink, Outlet} from "react-router-dom";
 
 export const CatalogPage = () => {
     const dispatch = useDispatch();
-    const navigate = useNavigate();
 
     useEffect(() => {
         dispatch(loadCategoriesIfNotExist);
     }, []);
 
     const categories = useSelector(state => selectCategories(state));
-    console.log(categories[0], categories[0].id);
-
 
     if (categories.length === 0) return null;
-
-    // navigate(`categories/${categories[0].id}`)
 
     return (
         <PageContainer>
