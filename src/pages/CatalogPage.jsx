@@ -3,10 +3,12 @@ import styled from 'styled-components';
 import {selectCategories} from "../store/category/selectors";
 import {useDispatch, useSelector} from "react-redux";
 import {loadCategoriesIfNotExist} from "../store/category/loadCategoriesIfNotExist";
-import {NavLink, Outlet} from "react-router-dom";
+import {Navigate, NavLink, Outlet, useParams} from "react-router-dom";
 
 export const CatalogPage = () => {
     const dispatch = useDispatch();
+    const params = useParams();
+    console.log(params, Object.keys(params).length === 0)
 
     useEffect(() => {
         dispatch(loadCategoriesIfNotExist);
@@ -14,7 +16,11 @@ export const CatalogPage = () => {
 
     const categories = useSelector(state => selectCategories(state));
 
+
     if (categories.length === 0) return null;
+    if (Object.keys(params).length === 0) {
+        return <Navigate to={`/categories/${categories[0].id}`}></Navigate>
+    }
 
     return (
         <PageContainer>

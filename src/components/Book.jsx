@@ -7,7 +7,7 @@ import {Link} from "react-router-dom";
 export const Book = ({bookId, className}) => {
     const book = useSelector((state) => selectBookById(state, bookId));
 
-    if (!book) return null;
+    if (Object.keys(book).length === 0) return null;
 
     return (
         <CustomLink to={`/books/${bookId}`} className={className}>

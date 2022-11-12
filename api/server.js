@@ -43,7 +43,7 @@ app.get('/api/books/:id', (req,res) => {
         }
         if (toBreak) break;
     }
-    res.send(book)
+    res.send([book])
 })
 
 app.get('/api/books/:id/reviews', (req,res) => {

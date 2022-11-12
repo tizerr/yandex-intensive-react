@@ -8,7 +8,6 @@ import {useEffect} from "react";
 import {loadBookIfNotExist} from "../store/book/loadBookIfNotExist";
 import {loadReviewsIfNotExist} from "../store/review/loadReviewsIfNotExist";
 
-
 export const BookPage = () => {
     const {bookId} = useParams();
     const dispatch = useDispatch();
@@ -19,10 +18,8 @@ export const BookPage = () => {
     }, []);
 
     const book = useSelector((state) => selectBookById(state, bookId));
-    console.log(bookId)
 
-    if (!book) return null;
-    console.log(book.reviews)
+    if (Object.keys(book).length === 0) return null;
 
     return (
         <PageContainer>
@@ -34,7 +31,7 @@ export const BookPage = () => {
                 </AnnotationContainer>
             </Description>
             <ReviewsContainer>
-                { book.reviews.map((reviewId) => <Review key={reviewId} reviewId={reviewId}/>) }
+                { book.reviews.map((review) => <Review key={review.id} reviewId={review.id}/>) }
             </ReviewsContainer>
         </PageContainer>
     )
@@ -60,6 +57,7 @@ const BookDescription = styled(Book)`
   width: 49%;
   margin-bottom: 0;
   align-items: end;
+  cursor: default;
 `
 
 const Title = styled.h3`

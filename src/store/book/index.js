@@ -15,11 +15,13 @@ export const bookSlice = createSlice({
       state.status = Statuses.inProgress;
     },
     successLoading: (state, action) => {
+      console.log('success loading')
       state.status = Statuses.success;
       state.entities = { ...state.entities, ...action.payload.entities };
       state.ids = Array.from(new Set([...state.ids, ...action.payload.ids]));
     },
     failLoading: (state) => {
+      console.log('fail')
       state.status = Statuses.failed;
     },
   },

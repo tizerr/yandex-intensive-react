@@ -5,9 +5,8 @@ import {selectReviewById} from "../store/review/selectors";
 export const Review = ({reviewId}) => {
 
     const review = useSelector((state) => selectReviewById(state, reviewId))
-    console.log(review)
 
-    if (!review) return null;
+    if (Object.keys(review).length === 0) return null;
 
     return <ReviewContainer>
         <Title>
