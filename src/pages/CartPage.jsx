@@ -38,10 +38,9 @@ export const CartPage = () => {
                         {
                             booksIds.map((id) => {
                                 const book = allBooks.find((b) => b.id === id);
-                                console.log(book)
                                 return book.price * books[id];
                             }).reduce((sum, a) => sum + a, 0)
-                        }
+                        } ₽
                     </Sum>
                     <Btn>Купить</Btn>
                 </Buy>
@@ -93,7 +92,7 @@ const Cart = styled.div`
   width: 28%;
   background-color: white;
   border-radius: .5rem;
-  padding: 1rem 1.5rem;
+  padding: 1rem 1.2rem;
   height: 55vh;
   display: flex;
   flex-direction: column;

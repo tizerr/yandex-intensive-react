@@ -8,13 +8,13 @@ export const Price = ({bookId, count}) => {
     return (
         <PriceContainer>
             <div>{book.name}</div>
-            <Count>{book.price * count} ₽</Count>
+            <Count>{book.price * count}&nbsp;₽</Count>
         </PriceContainer>
     )
 }
 
 const PriceContainer = styled.div`
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   margin-bottom: .5rem;
   display: flex;
   justify-content: space-between;
